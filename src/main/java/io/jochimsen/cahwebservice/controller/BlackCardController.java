@@ -22,17 +22,21 @@ public class BlackCardController extends HashController {
     private BlackCardRepository blackCardRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<BlackCardResponse> getBlackCards() {
-        return blackCardRepository.findAll().stream()
+    public HashResponse<List<BlackCardResponse>> getBlackCards() {
+        final List<BlackCardResponse> blackCards =  blackCardRepository.findAll().stream()
                 .map(blackCard -> new BlackCardResponse(blackCard.getBlackCardId(), blackCard.getText(),  blackCard.getBlankCount()))
                 .collect(Collectors.toList());
+
+        final String hash = getHash();
+
+        return new HashResponse<>(blackCards, hash);
     }
 
     @Override
-    public HashResponse getHash() {
+    public String getHash() {
         //ToDo: Add hash computation in a way that the same data produces always the same hash
 
-        final HashResponse hashResponse = new HashResponse("blup");
-        return hashResponse;
+        final String hash = "blup";
+        return hash;
     }
 }

@@ -1,12 +1,9 @@
 package io.jochimsen.cahwebservice.controller;
 
-import io.jochimsen.cahwebservice.request.CheckHashRequest;
-import io.jochimsen.cahwebservice.response.CheckHashResponse;
 import io.jochimsen.cahwebservice.response.HashResponse;
 import io.jochimsen.cahwebservice.response.WhiteCardResponse;
 import io.jochimsen.cahwebservice.repository.WhiteCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,17 +19,21 @@ public class WhiteCardController extends HashController {
     private WhiteCardRepository whiteCardRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<WhiteCardResponse> getWhiteCards() {
-        return whiteCardRepository.findAll().stream()
+    public HashResponse<List<WhiteCardResponse>> getWhiteCards() {
+        final List<WhiteCardResponse> whiteCards = whiteCardRepository.findAll().stream()
                 .map(whiteCard -> new WhiteCardResponse(whiteCard.getWhiteCardId(), whiteCard.getText()))
                 .collect(Collectors.toList());
+
+        final String hash = getHash();
+
+        return new HashResponse<>(whiteCards, hash);
     }
 
     @Override
-    public HashResponse getHash() {
+    public String getHash() {
         //ToDo: Add hash computation in a way that the same data produces always the same hash
 
-        final HashResponse hashResponse = new HashResponse("blup");
-        return hashResponse;
+        final String hash = "blup";
+        return hash;
     }
 }
