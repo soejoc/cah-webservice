@@ -1,5 +1,6 @@
 package io.jochimsen.cahwebservice.controller;
 
+import io.jochimsen.cahwebservice.entity.WhiteCard;
 import io.jochimsen.cahwebservice.response.HashResponse;
 import io.jochimsen.cahwebservice.response.WhiteCardResponse;
 import io.jochimsen.cahwebservice.repository.WhiteCardRepository;
@@ -20,20 +21,20 @@ public class WhiteCardController extends HashController {
 
     @RequestMapping(method = RequestMethod.GET)
     public HashResponse<List<WhiteCardResponse>> getWhiteCards() {
-        final List<WhiteCardResponse> whiteCards = whiteCardRepository.findAll().stream()
+        final List<WhiteCard> whiteCards = whiteCardRepository.findAll();
+
+        final List<WhiteCardResponse> whiteCardsResponse = whiteCards.stream()
                 .map(whiteCard -> new WhiteCardResponse(whiteCard.getWhiteCardId(), whiteCard.getText()))
                 .collect(Collectors.toList());
 
-        final String hash = getHash();
+        final int hash = whiteCards.hashCode();
 
-        return new HashResponse<>(whiteCards, hash);
+        return new HashResponse<>(whiteCardsResponse, hash);
     }
 
     @Override
-    public String getHash() {
-        //ToDo: Add hash computation in a way that the same data produces always the same hash
-
-        final String hash = "blup";
-        return hash;
+    public int getHash() {
+        final List<WhiteCard> whiteCards = whiteCardRepository.findAll();
+        return whiteCards.hashCode();
     }
 }

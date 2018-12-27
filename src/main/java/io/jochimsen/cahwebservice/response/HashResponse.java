@@ -2,9 +2,9 @@ package io.jochimsen.cahwebservice.response;
 
 public class HashResponse<T> {
     private final T data;
-    private final String hash;
+    private final int hash;
 
-    public HashResponse(final T data, final String hash) {
+    public HashResponse(final T data, final int hash) {
         this.data = data;
         this.hash = hash;
     }
@@ -13,7 +13,7 @@ public class HashResponse<T> {
         return data;
     }
 
-    public String getHash() {
+    public int getHash() {
         return hash;
     }
 }

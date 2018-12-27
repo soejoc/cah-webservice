@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public abstract class HashController {
 
-    public abstract String getHash();
+    protected abstract int getHash();
 
     @RequestMapping(value = "/hash", method = RequestMethod.POST)
     public CheckHashResponse checkHash(@RequestBody final CheckHashRequest checkHashRequest) {
-        final String computedHash = getHash();
-        final String postedHash = checkHashRequest.getHash();
+        final int computedHash = getHash();
+        final int postedHash = checkHashRequest.getHash();
 
-        final CheckHashResponse checkHashResponse = new CheckHashResponse(computedHash.equals(postedHash));
-        return checkHashResponse;
+        return new CheckHashResponse(computedHash == postedHash);
     }
 }

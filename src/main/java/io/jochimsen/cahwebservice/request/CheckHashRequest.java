@@ -1,13 +1,13 @@
 package io.jochimsen.cahwebservice.request;
 
 public class CheckHashRequest {
-    private String hash;
+    private int hash;
 
-    public String getHash() {
+    public int getHash() {
         return hash;
     }
 
-    public void setHash(final String hash) {
+    public void setHash(final int hash) {
         this.hash = hash;
     }
 }

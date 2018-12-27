@@ -1,6 +1,7 @@
 package io.jochimsen.cahwebservice.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -27,5 +28,10 @@ public class WhiteCard {
 
     public void setText(final String text) {
         this.text = text;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(whiteCardId, text);
     }
 }
