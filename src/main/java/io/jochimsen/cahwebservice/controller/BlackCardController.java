@@ -24,6 +24,7 @@ public class BlackCardController extends HashController {
         final List<BlackCard> blackCards = blackCardRepository.findAll();
 
         final List<BlackCardResponse> blackCardsResponse = blackCards.stream()
+                .filter(blackCard -> blackCard.getBlankCount() == 1)
                 .map(blackCard -> new BlackCardResponse(blackCard.getBlackCardId(), blackCard.getText(),  blackCard.getBlankCount()))
                 .collect(Collectors.toList());
 
