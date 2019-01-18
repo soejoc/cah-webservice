@@ -7,7 +7,7 @@ spring:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/cah?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+    url: jdbc:postgresql://localhost:5432/cah
     username: root
     password: 1qayxsw2
 
@@ -19,7 +19,7 @@ spring:
 spring:
   profiles: container
   datasource:
-    url: jdbc:${DBMS:postgresql}://${DATABASE_HOST}:${DATABASE_PORT:5432}/${DATABASE_NAME}
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT:5432}/${DATABASE_NAME}
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
 
