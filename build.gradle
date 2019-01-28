@@ -10,8 +10,22 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.20.1')
+		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.21.0')
 	}
+}
+
+static def getDockerTag() {
+	def branch = ""
+	def proc = "git rev-parse --abbrev-ref HEAD".execute()
+	proc.in.eachLine { line -> branch = line }
+	proc.err.eachLine { line -> println line }
+	proc.waitFor()
+	
+	if(branch == "master") {
+		branch = "latest"
+	}
+	
+	branch
 }
 
 apply plugin: 'java'
@@ -29,8 +43,9 @@ task unpack(type: Copy) {
 	from(zipTree(tasks.bootJar.outputs.files.singleFile))
 	into("build/dependency")
 }
+
 docker {
-	name "${dockerOrganization}/${bootJar.baseName}"
+	name "${dockerOrganization}/${bootJar.baseName}:${getDockerTag()}"
 	copySpec.from(tasks.unpack.outputs).into("dependency")
 	buildArgs(['DEPENDENCY': "dependency"])
 }
@@ -47,6 +62,6 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.flywaydb:flyway-core')
-	runtimeOnly('mysql:mysql-connector-java')
+	runtimeOnly('org.postgresql:postgresql')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
