@@ -1,9 +1,9 @@
 package io.jochimsen.cahwebservice.controller;
 
 import io.jochimsen.cahwebservice.entity.WhiteCard;
+import io.jochimsen.cahwebservice.repository.WhiteCardRepository;
 import io.jochimsen.cahwebservice.response.HashResponse;
 import io.jochimsen.cahwebservice.response.WhiteCardResponse;
-import io.jochimsen.cahwebservice.repository.WhiteCardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

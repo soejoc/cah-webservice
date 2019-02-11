@@ -3,7 +3,6 @@ package io.jochimsen.cahwebservice.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table
