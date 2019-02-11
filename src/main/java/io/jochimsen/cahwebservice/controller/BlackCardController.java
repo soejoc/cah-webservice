@@ -1,9 +1,10 @@
 package io.jochimsen.cahwebservice.controller;
 
 import io.jochimsen.cahwebservice.entity.BlackCard;
+import io.jochimsen.cahwebservice.repository.BlackCardRepository;
 import io.jochimsen.cahwebservice.response.BlackCardResponse;
 import io.jochimsen.cahwebservice.response.HashResponse;
-import io.jochimsen.cahwebservice.repository.BlackCardRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,10 +15,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/blackCard")
+@AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class BlackCardController extends HashController {
 
-    @Autowired
-    private BlackCardRepository blackCardRepository;
+    private final BlackCardRepository blackCardRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public HashResponse<List<BlackCardResponse>> getBlackCards() {
