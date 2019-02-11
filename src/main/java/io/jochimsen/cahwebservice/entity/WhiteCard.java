@@ -1,10 +1,13 @@
 package io.jochimsen.cahwebservice.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table
+@Data
 public class WhiteCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,25 +16,4 @@ public class WhiteCard {
 
     @Column
     private String text;
-
-    public long getWhiteCardId() {
-        return whiteCardId;
-    }
-
-    public void setWhiteCardId(final long whiteCardId) {
-        this.whiteCardId = whiteCardId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(final String text) {
-        this.text = text;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(whiteCardId, text);
-    }
 }

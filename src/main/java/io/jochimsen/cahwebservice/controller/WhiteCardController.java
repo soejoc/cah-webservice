@@ -4,6 +4,7 @@ import io.jochimsen.cahwebservice.entity.WhiteCard;
 import io.jochimsen.cahwebservice.response.HashResponse;
 import io.jochimsen.cahwebservice.response.WhiteCardResponse;
 import io.jochimsen.cahwebservice.repository.WhiteCardRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,10 +15,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/whiteCard")
+@AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class WhiteCardController extends HashController {
 
-    @Autowired
-    private WhiteCardRepository whiteCardRepository;
+    private final WhiteCardRepository whiteCardRepository;
 
     @RequestMapping(method = RequestMethod.GET)
     public HashResponse<List<WhiteCardResponse>> getWhiteCards() {

@@ -64,4 +64,9 @@ dependencies {
 	implementation('org.flywaydb:flyway-core')
 	runtimeOnly('org.postgresql:postgresql')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+	// Lombok
+	def lombok_version = "1.18.4"
+	compileOnly "org.projectlombok:lombok:$lombok_version"
+	annotationProcessor "org.projectlombok:lombok:$lombok_version"
 }
